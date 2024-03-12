@@ -8,5 +8,48 @@ Write unit tests as described in README.md.
 
 """
 from circle import Circle
+import unittest, pytest, math
 
-# TODO write 3 tests as described above
+
+class CircleTest(unittest.TestCase):
+
+    def setUp(self):
+        self.c1 = Circle(3)
+        self.c2 = Circle(5)
+        self.c3 = Circle(0)
+
+    def test_add_area(self):
+        new1 = self.c1.add_area(self.c2)
+        hy1 = math.hypot(3, 5)
+        self.assertEqual(new1.get_radius(), hy1)
+        self.assertEqual(new1.get_area(), math.pi*hy1*hy1)
+
+        new2 = self.c2.add_area(self.c1)
+        hy2 = math.hypot(5, 3)
+        self.assertEqual(new2.get_radius(), hy2)
+        self.assertEqual(new2.get_area(), math.pi*hy2*hy2)
+
+        new3 = self.c1.add_area(self.c1)
+        hy3 = math.hypot(3, 3)
+        self.assertEqual(new3.get_radius(), hy3)
+        self.assertEqual(new3.get_area(), math.pi*hy3*hy3)
+
+        new4 = self.c2.add_area(self.c2)
+        hy4 = math.hypot(5, 5)
+        self.assertEqual(new4.get_radius(), hy4)
+        self.assertEqual(new4.get_area(), math.pi*hy4*hy4)
+
+    def test_add_area_zero(self):
+        new1 = self.c1.add_area(self.c3)
+        hy1 = math.hypot(3, 0)
+        self.assertEqual(new1.get_radius(), hy1)
+        self.assertEqual(new1.get_area(), math.pi*hy1*hy1)
+
+        new2 = self.c3.add_area(self.c1)
+        hy2 = math.hypot(0, 3)
+        self.assertEqual(new2.get_radius(), hy2)
+        self.assertEqual(new2.get_area(), math.pi*hy2*hy2)
+
+    def test_negative_radius(self):
+        with pytest.raises(ValueError):
+            self.new = Circle(-1)
