@@ -12,13 +12,16 @@ import unittest, pytest, math
 
 
 class CircleTest(unittest.TestCase):
+    """Tests of Circle"""
 
     def setUp(self):
+        """Set up"""
         self.c1 = Circle(3)
         self.c2 = Circle(5)
         self.c3 = Circle(0)
 
     def test_add_area(self):
+        """Typical case"""
         new1 = self.c1.add_area(self.c2)
         hy1 = math.hypot(3, 5)
         self.assertEqual(new1.get_radius(), hy1)
@@ -40,6 +43,7 @@ class CircleTest(unittest.TestCase):
         self.assertEqual(new4.get_area(), math.pi*hy4*hy4)
 
     def test_add_area_zero(self):
+        """Edge case"""
         new1 = self.c1.add_area(self.c3)
         hy1 = math.hypot(3, 0)
         self.assertEqual(new1.get_radius(), hy1)
@@ -51,5 +55,6 @@ class CircleTest(unittest.TestCase):
         self.assertEqual(new2.get_area(), math.pi*hy2*hy2)
 
     def test_negative_radius(self):
+        """Circle constructor raises exception if the radius is negative"""
         with pytest.raises(ValueError):
             self.new = Circle(-1)
