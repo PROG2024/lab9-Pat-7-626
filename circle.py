@@ -3,6 +3,20 @@ import math
 
 
 class Circle:
+    """
+    Normal case:
+    >>> c1 = Circle(3)
+    >>> c2 = Circle(4)
+    >>> c3 = c1.add_area(c2)
+    >>> c3.get_radius()
+    5.0
+
+    Illegal case:
+    >>> c4 = Circle(-1)
+    Traceback (most recent call last):
+    ...
+    ValueError: radius must be non-negative
+    """
 
     def __init__(self, radius):
         """Initialize a circle with given radius.
